@@ -1,0 +1,15 @@
+plot3<-function(){
+        setwd("E:/R-3.0.3/R workplace dic")
+        data<-read.table("household_power_consumption.txt",colClasses="character",sep=";",header=FALSE,na.strings="?",nrows=2881,skip=66637)
+        ##class(data$Global_active_power)
+        subDataX<-strptime(paste(data[,1], data[,2]), format='%d/%m/%Y %H:%M:%S')
+        subDataY_1<-as.numeric(data[,7])
+        subDataY_2<-as.numeric(data[,8])
+        subDataY_3<-as.numeric(data[,9])
+        png("plot3.png")
+        plot(subDataX,subDataY_1,type="l",xlab="",ylab="Energy sub metering")
+        lines(subDataX,subDataY_2,col="red")
+        lines(subDataX,subDataY_3,col="blue")
+        legend("topright",lty=1,col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+        dev.off()
+}
